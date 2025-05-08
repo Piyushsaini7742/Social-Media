@@ -1,7 +1,5 @@
 const User = require("../models/User");
 
-
-// Follow
 exports.followUser = async (req, res) => {
     try {
         const userToFollow = await User.findById(req.params.id);
@@ -14,14 +12,13 @@ exports.followUser = async (req, res) => {
         userToFollow.followers.push(currentUser._id);
         await currentUser.save();
         await userToFollow.save();
-        return res.status(200).json({message:"Badhai ho aapne ek user ko follow kiya hai"});
+        return res.status(200).json({ message: "Badhai ho aapne ek user ko follow kiya hai" });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "An Unknown Error Occured in Catch Block" });
     }
 }
 
-// Unfollow
 exports.unFollowUser = async (req, res) => {
     try {
         const userToUnfollow = await User.findById(req.params.id);
